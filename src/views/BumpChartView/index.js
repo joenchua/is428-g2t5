@@ -56,7 +56,7 @@ export default class viewBumpChart extends Component {
         const width = 2000;
         const height = 1000;
         const countries = ["CHN", "IND", "USA", "GER", "FIN", "NOR", "ROU", "EST", "FRA", "MAR"]
-        console.log("options:", this.state.filterOptions)
+        // console.log("options:", this.state.filterOptions)
         // console.log(countries)
         // console.log(data)
         // const allCountries = Array.from(new Set(data.flatMap(d => [d.NOC])))

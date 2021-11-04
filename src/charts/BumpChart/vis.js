@@ -22,29 +22,31 @@ const draw = (props) => {
 
     const matrix2 = Array.from(ni, () => new Array(Years.length).fill({rank: 0, Medal: 0, next: null}));  
     // console.log("matrix2:", matrix2)
+    var count = 0;
     for (const {NOC, Year, Medal} of data) {
-        var count = 0;
-        if (Medal === "Gold") {
-            count = 3
-        }
-        else if (Medal === "Silver") {
-            count = 2
-        }
-        else if (Medal === "Bronze") {
-            count = 1
-        }
-        // console.log("NOC:", NOC, "Year:", Year)
+        // if (Medal === "Bronze" || Medal === "Silver" || Medal === "Gold") {
+        //     count += 1
+        // }
+        // else if (Medal === "Silver") {
+        //     count += 2
+        // }
+        // else if (Medal === "Bronze") {
+        //     count += 1
+        // }
+        console.log("NOC:", NOC, "Year:", Year, "medals:", Medal)
         // console.log("ni:", ni.get(NOC), "yi:", yi.get(Year))
         matrix2[ni.get(NOC)][yi.get(Year)] = {rank: 0, Medal: count, next: null};
-        // console.log(count)
-        
+        // console.log("matrix:", matrix2[ni.get(NOC)][yi.get(Year)])
     };    
+  
+    // console.log("count medals:", count)
 
     matrix2.forEach((d) => {
         for (let i = 0; i<d.length - 1; i++) 
             d[i].next = d[i + 1];
         // console.log("d:", d, d.length)
     });
+
     Years.forEach((d, i) => {
         const array = [];
         matrix2.forEach((d) => array.push(d[i]));
