@@ -15,7 +15,7 @@ function App() {
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    d3.csv("/athlete_events.csv").then((d) => {
+    d3.csv("/athlete_events_summer.csv").then((d) => {
       setData(d);
       setLoading(false);
     });
