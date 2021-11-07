@@ -109,7 +109,7 @@ export default class ViolinChart extends Component {
             />
             <div>
             <div className='vis-ViolinChart' style = {{"float": "left"}}></div>
-            <div style = {{"margin-left": "750px"}}>
+            <div style = {{"marginLeft": "750px"}}>
                 <svg className='vis-subPhysicalChart'></svg>
             </div></div>
 

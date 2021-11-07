@@ -14,7 +14,7 @@ export default class BubbleChart extends Component {
 
     render() {
         return (
-            <div className='vis-bubblechart'/>
+            <div className='vis-bubblechart' style={{width: '500px'}}/>
         )
     }
 }

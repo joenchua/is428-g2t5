@@ -289,7 +289,7 @@ const draw = (props) => {
             // append axes and axes labels
             svg.append("g")
                 .attr("id", "yAxis")
-                .style("font-size", 30)
+                // .style("font-size", 30)
                 .call(d3.axisLeft(y))
             svg.append("text")
                 .attr("text-anchor", "end")

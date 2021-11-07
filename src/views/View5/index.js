@@ -4,7 +4,7 @@ import './view5.css';
 export default class View5 extends Component {
     render() {
         const {data} = this.props;
-        const width = 700;
+        const width = 800;
         const height = 700;
 
         return (

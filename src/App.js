@@ -3,12 +3,12 @@ import { csv } from 'd3';
 
 import logo from './assets/logo.png';
 
-import { Layout } from 'antd';
-import View1 from './views/View1';
+import { Layout, Row, Col } from 'antd';
 import View2 from './views/View2';
 import View3 from './views/View3';
 // import View4 from './views/View4';
 import View5 from './views/View5';
+import View6 from './views/View6';
 
 // import * as d3 from "d3";
 import "./App.css";
@@ -52,19 +52,23 @@ const App = () => {
 
   return (
     <div>
-      <div className='title'><img src={logo} width='70' style={{marginRight: '10px'}} />Olympics Insights<img src={logo} width='70' style={{marginLeft: '10px'}} /></div>
+      <div className='title' style={{margin: '20px 0'}}><img src={logo} width='70' style={{marginRight: '10px'}} />Olympics Insights<img src={logo} width='70' style={{marginLeft: '10px'}} /></div>
       {loading && <div>loading</div>}
       {!loading && 
-        <Layout style={{ height: 2000, "float": "left" }}>
-            {/* <Layout>
-              <Content style={{ height: 200, width: 300 }}>
-                <View1 data={data}/>
-              </Content>
-            </Layout> */}
+        <Layout>
+            <Row>
+              <Col>              
+                <Content style={{ height: 500, width: 750 }}>
+                  <View2 data={data}/>
+                </Content>
+              </Col>
+              <Col>              
+                <Content style={{ height: 500, width: 750 }}>
+                  <View6 data={data} />
+                </Content>
+              </Col>
+            </Row>
             <Layout>
-              <Content style={{ height: 550, width: 750 }}>
-                <View2 data={data}/>
-              </Content>
             </Layout>
             <Layout>
               <Content style={{ height: 550, width: 1500 }}>
@@ -77,14 +81,9 @@ const App = () => {
             {/*  </Content>*/}
             {/*</Layout>*/}
             <Layout>
-            <Content style={{ height: 800, width: 750 }}>
-              <View5 data={data} />
-            </Content>
-          </Layout>
-          <Layout>
-            <Content style={{ height: 500, width: 750 }}>
-              <View6 data={data}/>
-            </Content>      
+              <Content style={{ height: 800, width: 750 }}>
+                <View5 data={data} />
+              </Content>
           </Layout>
         </Layout>
       }

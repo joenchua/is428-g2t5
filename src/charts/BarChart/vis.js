@@ -73,7 +73,7 @@ const draw = (props) => {
 
     var x = d3.scaleLinear()
         .domain([0, d3.max(zippedData) + 30])
-        .range([0, chartWidth]);
+        .range([0, chartWidth+100]);
 
     var y = d3.scaleLinear()
         .range([410,0]);
@@ -82,9 +82,6 @@ const draw = (props) => {
         .scale(y)
         .tickFormat('')
         .tickSize(0)
-    
-    
-
 
     // Specify the chart area and dimensions
     var chart = d3.select(".vis-barchart")

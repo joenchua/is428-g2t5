@@ -8,7 +8,7 @@ export default class View6 extends Component {
         const width = 900;
         const height = 500;
         return (
-            <div id='view5' className='pane'>
+            <div id='view6' className='pane'>
                 <div className='header'>Top 5 Countries </div>
                 <BarChart data={data} width={width} height={height} />
             </div>
