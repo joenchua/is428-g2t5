@@ -51,7 +51,7 @@ const App = () => {
             </Layout>
             <Layout>
               <Content style={{ height: 500, width: 750 }}>
-                <View5 data={data}/>
+                <View6 data={data}/>
               </Content>
             </Layout>
         </Layout>

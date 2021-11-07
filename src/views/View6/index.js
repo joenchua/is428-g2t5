@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './view5.css';
+import './view6.css';
 import BarChart from '../../charts/BarChart';
 
-export default class View5 extends Component {
+export default class View6 extends Component {
     render() {
         const {data} = this.props;
         const width = 900;
