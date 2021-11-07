@@ -13,7 +13,7 @@ const draw = (props) => {
 
     const NOCs = Array.from(new Set(data.flatMap(d => [d.NOC])))
     const Years = Array.from(new Set(data.flatMap(d => [d.Year]))).sort()
-    // console.log("NOC:", NOC, "Year:", Year)
+    // console.log("NOC:", NOCs, "Year:", Years)
 
     // console.log("territories:", territories, "quarters:", quarters)
     const ni = new Map(NOCs.map((noc, i) => [noc, i]));
@@ -22,10 +22,14 @@ const draw = (props) => {
 
     const matrix2 = Array.from(ni, () => new Array(Years.length).fill({rank: 0, Medal: 0, next: null}));  
     // console.log("matrix2:", matrix2)
-    var count = 0;
+    // var count = 0; 
     for (const {NOC, Year, Medal} of data) {
-        // if (Medal === "Bronze" || Medal === "Silver" || Medal === "Gold") {
-        //     count += 1
+        var count =  matrix2[ni.get(NOC)][yi.get(Year)]["Medal"];
+        if (Medal === "Bronze" || Medal === "Silver" || Medal === "Gold") {
+            count += 1
+        }
+        // if ( Medal === "Gold") {
+        //     count += 3
         // }
         // else if (Medal === "Silver") {
         //     count += 2
@@ -33,7 +37,7 @@ const draw = (props) => {
         // else if (Medal === "Bronze") {
         //     count += 1
         // }
-        console.log("NOC:", NOC, "Year:", Year, "medals:", Medal)
+        // console.log("NOC:", NOC, "Year:", Year, "medals:", Medal)
         // console.log("ni:", ni.get(NOC), "yi:", yi.get(Year))
         matrix2[ni.get(NOC)][yi.get(Year)] = {rank: 0, Medal: count, next: null};
         // console.log("matrix:", matrix2[ni.get(NOC)][yi.get(Year)])
@@ -51,17 +55,21 @@ const draw = (props) => {
         const array = [];
         matrix2.forEach((d) => array.push(d[i]));
         array.sort((a, b) => b.Medal - a.Medal);
-        array.forEach((d, j) => d.rank = j);
+        let count = 0;
+        let index = 0;
+        array.forEach((d, j) => {
+                return d.rank = j
+        });
     })
 
     var chartData = matrix2
-    // console.log(chartData)
+    console.log("Chartdata:", chartData)
 
 
     const len = Years.length - 1;
     const ranking = chartData.map((d, i) => ({NOC: NOCs[i], first: d[0].rank, last: d[len].rank}));
     
-    // console.log(ranking)
+    console.log(ranking)
 
     var seq = (start, length) => Array.apply(null, {length: length}).map((d, i) => i + start);
     var color = d3.scaleOrdinal(d3.schemeTableau10)

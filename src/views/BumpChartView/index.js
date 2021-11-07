@@ -14,7 +14,7 @@ const Option = (props) => {
           checked={props.isSelected}
           onChange={() => null}
         />{" "}
-        <label>{props.label}</label>
+        <label key={props.label}>{props.label}</label>
       </components.Option>
     </div>
   );
@@ -24,7 +24,7 @@ export default class viewBumpChart extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          selectValue: [],
+          selectValue: Array.from(new Set(["CHN", "IND", "USA", "GER", "NOR", "ROU", "EST", "FRA", "MAR"].map(data=>({"value": data, "label": data})))),
           filterOptions: [],
           data: [],
         };
@@ -55,7 +55,7 @@ export default class viewBumpChart extends Component {
         // const {data} = this.props;
         const width = 2000;
         const height = 1000;
-        const countries = ["CHN", "IND", "USA", "GER", "FIN", "NOR", "ROU", "EST", "FRA", "MAR"]
+        const countries = ["CHN", "IND", "USA", "GER", "NOR", "ROU", "EST", "FRA", "MAR"]
         // console.log("options:", this.state.filterOptions)
         // console.log(countries)
         // console.log(data)
@@ -77,6 +77,8 @@ export default class viewBumpChart extends Component {
                 {console.log("value:", this.state.selectValue)}
                 <div className='header'>Medals Ranking</div>
                 <BumpChart data={this.state.data} width={width} height={height} countries={this.state.selectValue.map(data=>data.value)}/>
+
+
             </div>
         )
     }
