@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { csv } from 'd3';
+
 import logo from './assets/logo.png';
 
 import { Layout } from 'antd';
@@ -79,6 +80,11 @@ const App = () => {
             <Content style={{ height: 800, width: 750 }}>
               <View5 data={data} />
             </Content>
+          </Layout>
+          <Layout>
+            <Content style={{ height: 500, width: 750 }}>
+              <View6 data={data}/>
+            </Content>      
           </Layout>
         </Layout>
       }
