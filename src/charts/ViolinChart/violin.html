@@ -1,0 +1,309 @@
+<!-- Code from d3-graph-gallery.com -->
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v7.js"></script>
+
+<!-- Create a div where the graph will take place -->
+<div id="my_dataviz"></div>
+
+
+<script>
+    // set the dimensions and margins of the graph
+    var margin = {top: 10, right: 30, bottom: 150, left: 40},
+        width = 4000 - margin.left - margin.right,
+        height = 800 - margin.top - margin.bottom;
+
+    // append the svg object to the body of the page
+    var svg = d3.select("#my_dataviz")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+    d3.csv("athlete_events.csv", (row, i) => {
+        return {
+            id: row.ID,
+            name: row.Name,
+            sex: row.Sex,
+            age: row.Age,
+            height: row.Height,
+            weight: row.Weight,
+            team: row.Team,
+            noc: row.NOC,
+            games: row.Games,
+            year: row.Year,
+            season: row.Season,
+            city: row.City,
+            sport: row.Sport,
+            event: row.Event,
+            medal: row.Medal,
+            //avg: (+row.min_temperature + +row.max_temperature) /2,
+        };
+    }).then(rows => {
+        allData = rows;
+        makeChart(rows);
+    }).catch(error => {
+        console.log(error);
+    });
+
+
+    function makeChart(data) {
+
+
+        data = data.filter(function (d) {
+            return d.height != 'NA'
+        });
+        // Compute quartiles, median, inter quantile range min and max --> these info are then used to draw the box.
+        console.log(data);
+
+
+        data.map(d => {
+                if (d.medal === 'NA') {
+                    d.medal = 0
+                } else if (d.medal === 'Bronze') {
+                    d.medal = 1
+                } else if (d.medal === 'Silver') {
+                    d.medal = 2
+                } else if (d.medal === 'Gold') {
+                    d.medal = 3
+                }
+            }
+        );
+
+        console.log(data);
+
+        data.sort(function (element_a, element_b) {
+            return element_b.medal - element_a.medal;
+        });
+
+        data.sort(function (element_a, element_b) {
+            return element_a.sport - element_b.sport;
+        });
+
+        data.sort(function (element_a, element_b) {
+            return element_a.id - element_b.id;
+        });
+        console.log(data);
+
+        dataPreProc = data;
+        data = [];
+        data.push(dataPreProc[1]);
+        // accounting for the double counting of athletes
+
+        // first run just removes duplicate medals
+        for (let i = 1; i < dataPreProc.length; i++) {
+            // remove extra medals for the same sport
+            if (dataPreProc[i].id === dataPreProc[i - 1].id) {
+                if (dataPreProc[i].sport === dataPreProc[i - 1].sport) {
+                    if (dataPreProc[i].medal != dataPreProc[i - 1].medal) {
+                        data.push(dataPreProc[i]);
+                    }
+                } else {
+                    data.push(dataPreProc[i]);
+                }
+            } else {
+                data.push(dataPreProc[i]);
+            }
+        }
+
+
+    console.log(data);
+    dataGold = data.filter(function (d) {
+        return d.medal === 3
+    });
+
+    console.log(dataGold);
+    // make axis
+    let totalSport = data.map(x => x.sport);
+    totalSport = [...new Set(totalSport)];
+    console.log(totalSport);
+
+
+    // Show the Y scale
+    var y = d3.scaleLinear()
+        .domain([100, 220])
+        .range([height, 0])
+
+
+    svg.append("g")
+        .call(d3.axisLeft(y))
+
+
+    // declare the histogram (the bins)
+    var histogram = d3.bin()
+        .domain(y.domain())
+        .thresholds(y.ticks(20))    // Important: how many bins approx are going to be made? It is the 'resolution' of the violin plot
+        .value(d => d)
+
+    var sumstat = d3
+        .rollup(data, function (d) {
+            input = d.map(function (g) {
+                return g.height;
+            })    // Keep the variable called height
+            median = d3.quantile(d.map(function (g) {
+                return g.height;
+            }).sort(d3.ascending), .5)
+            bins = histogram(input)   // And compute the binning on it.
+            return [bins, median];
+        }, d => d.sport);
+
+    var sumstatGold = d3
+        .rollup(dataGold, function (d) {
+            input = d.map(function (g) {
+                return g.height;
+            })    // Keep the variable called height
+            median = d3.quantile(d.map(function (g) {
+                return g.height;
+            }).sort(d3.ascending), .5)
+            bins = histogram(input)   // And compute the binning on it.
+            return [bins, median];
+        }, d => d.sport);
+
+    console.log(sumstat);
+
+    // https://stackoverflow.com/questions/56795743/how-to-convert-map-to-array-of-object/56795800
+    sumstatArray = Array.from(sumstat, ([key, value]) => ({key, value}));
+    sumstatArray = sumstatArray.sort((a, b) => (a.value[1] > b.value[1] ? 1 : -1));
+
+    sumstatGoldArray = Array.from(sumstatGold, ([key, value]) => ({key, value}));
+    sumstatGoldArray = sumstatGoldArray.sort((a, b) => (a.value[1] > b.value[1] ? 1 : -1));
+
+    console.log(sumstatArray);
+
+    // What is the biggest number of value in a bin? We need it cause this value will have a width of 100% of the bandwidth.
+    var maxNum = 0
+    for (i in sumstatArray) {
+        allBins = sumstatArray[i].value[0]
+        lengths = allBins.map(function (a) {
+            return a.length;
+        })
+        longuest = d3.max(lengths)
+        if (longuest > maxNum) {
+            maxNum = longuest
+        }
+    }
+
+    var maxNumGold = 0
+    for (i in sumstatGoldArray) {
+        allBins = sumstatGoldArray[i].value[0]
+        lengths = allBins.map(function (a) {
+            return a.length;
+        })
+        longuest = d3.max(lengths)
+        if (longuest > maxNumGold) {
+            maxNumGold = longuest
+        }
+    }
+
+    console.log(sumstatArray);
+    console.log(maxNum);
+
+    totalSport2 = sumstatArray.map(x => x.key);
+    console.log(totalSport2);
+
+    var x = d3.scaleBand()
+        .range([0, width])
+        .domain(totalSport2)
+        .paddingInner(1)
+        .paddingOuter(.5);
+
+
+    svg.append("g")
+        .attr("id", "xAxis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x))
+        .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", ".15em")
+        .attr("transform", "rotate(-65)");
+
+
+    var xNum = d3.scaleLinear()
+        .range([0, 100])
+        .domain([-maxNum, maxNum])
+
+
+    var xNumGold = d3.scaleLinear()
+        .range([0, 100])
+        .domain([-maxNumGold, maxNumGold])
+
+
+    // Add the shape to this svg!
+    svg
+        .selectAll("myViolin")
+        .data(sumstatArray)
+        .enter()        // So now we are working group per group
+        .append("g")
+        .attr("transform", function (d) {
+            return ("translate(" + x(d.key) + " ,0)")
+        }) // Translation on the right to be at the group position
+        .append("path")
+        .datum(function (d) {
+            return (d.value[0])
+        })     // So now we are working bin per bin
+        .style("stroke", "none")
+        .style("opacity", 0.25)
+        .style("fill", "#69b3a2")
+        .attr("d", d3.area()
+            .x0(function (d) {
+                return (xNum(-d.length))
+            })
+            .x1(function (d) {
+                return (xNum(d.length))
+            })
+            .y(function (d) {
+                return (y(d.x0))
+            })
+            .curve(d3.curveCatmullRom)    // This makes the line smoother to give the violin appearance. Try d3.curveStep to see the difference
+        )
+
+    console.log(sumstatGoldArray);
+
+    // Add the shape to this svg!
+    svg
+        .selectAll("myViolin")
+        .data(sumstatGoldArray)
+        .enter()        // So now we are working group per group
+        .append("g")
+        .attr("transform", function (d) {
+            return ("translate(" + x(d.key) + " ,0)")
+        }) // Translation on the right to be at the group position
+        .append("path")
+        .datum(function (d) {
+            return (d.value[0])
+        })     // So now we are working bin per bin
+        .style("stroke", "none")
+        .style("opacity", 0.25)
+        .style("fill", "#69b3a2")
+        .attr("d", d3.area()
+            .x0(function (d) {
+                return (xNumGold(-d.length))
+            })
+            .x1(function (d) {
+                return (xNumGold(d.length))
+            })
+            .y(function (d) {
+                return (y(d.x0))
+            })
+            .curve(d3.curveCatmullRom)    // This makes the line smoother to give the violin appearance. Try d3.curveStep to see the difference
+        )
+    console.log("moo");
+
+    var tooltip = d3.select("#my_dataviz")
+    .append("div")
+    .style("position", "absolute")
+    .style("z-index", "10")
+    .style("visibility", "hidden")
+    .style("background", "#000")
+    .text("a simple tooltip");
+
+
+
+    }
+
+</script>
