@@ -5,6 +5,7 @@ const draw = (props) => {
     // console.log(data)
     const data = [];
 
+
     const rollupData = d3.rollup(
         rawData,
         d => d.length, // reducerFn
@@ -35,7 +36,9 @@ const draw = (props) => {
     height = 400 - margin.top - margin.bottom;
 
     // var years = ['1896', '1900', '1904', '1906', '1908', '1912', '1920', '1924', '1928', '1932', '1936', '1948', '1952', '1956', '1960', '1964', '1968', '1972', '1976', '1980', '1984', '1988', '1992', '1994', '1996', '1998', '2000', '2002', '2004', '2006', '2008', '2010', '2012', '2014', '2016']
-    
+
+        d3.select(".vis-areachart > *").remove();
+
     var svg = d3.select(".vis-areachart")
         .append("svg")
             .attr("width", width + margin.left + margin.right)
