@@ -2,13 +2,21 @@ import { COMPARISON_BINARY_OPERATORS } from '@babel/types';
 import * as d3 from 'd3';
 import { pack, hierarchy } from 'd3-hierarchy'
 
-const draw = (props) => {
-    const data = props.data;
+const draw = (props, componentNode, selectedCountry) => {
+    let data = props.data;
+
+    data = data.filter(function (d) {
+        if (selectedCountry.length === 0)
+            return d.Medal !== "NA"
+
+        return d.Medal !== "NA" && d.NOC === selectedCountry
+    });
+
     const rollupData = d3.rollup(
         data,
         d => d.length, // reducerFn
         d => d.Sport,
-        d => d.Event // keyToGroupBy
+        d => d.Event, // keyToGroupBy
     )
 
     const childrenAccessorFn = ([key, value]) => value.size && Array.from(value)
@@ -25,7 +33,7 @@ const draw = (props) => {
         .padding(5)
 
 
-    var tooltip = d3.select(".vis-bubblechart")
+    var tooltip = d3.select(componentNode)
         .append("div")
         .style("opacity", 0)
         .attr("class", "tooltip")
@@ -50,12 +58,28 @@ const draw = (props) => {
     }
 
     var mousemove = function (event,d) {
-        console.log(event)
-        console.log(d)
-        tooltip
+        const { children = null } = d
+        if (children) {
+            if (children.length > 0 && children[0].children) {
+                tooltip.style("opacity", 0)
+            }
+
+            let total = 0
+            children.forEach(child => {
+                const [_, value] = child.data
+                total += value
+            })
+
+            tooltip
+            .html(`Sport: ${d.data[0]} </br> Total number of Medal: ${total}`)
+            .style("left",event.pageX + "px")
+            .style("top",event.pageY + "px")
+        } else {
+            tooltip
             .html(`Sport: ${d.data[0]} </br> Total number of Medal: ${d.data[1]}`)
             .style("left",event.pageX + "px")
             .style("top",event.pageY + "px")
+        }
     }
 
     var mouseleave = function (d) {
@@ -65,20 +89,17 @@ const draw = (props) => {
             .style("stroke", "none")
     }
 
-
-
-    d3.select('.vis-bubblechart > *').remove();
-
     pack(hierarchyData);
     const root = pack(hierarchyData);
     let focus = root;
     let view;
 
-    let svg = d3.select('.vis-bubblechart')
+    let svg = d3.select(componentNode)
         .append('svg')
         .attr("viewBox", `-${width / 2} -${height / 2} ${width} ${height}`)
         .style("display", "block")
-        .style("margin", "0 -14px")
+        .style("margin", "0 -25px")
+        .style("margin-left", "12px")
         .style("cursor", "pointer")
         .on("click", (event) => zoom(event, root));
 
@@ -105,7 +126,7 @@ const draw = (props) => {
         .style("fill-opacity", d => d.parent === root ? 1 : 0)
         .style("display", d => d.parent === root ? "inline" : "none")
         .text(d => d.data[0])
-        .style("font-size", d => d.depth === 1 ? "15px" : "10px")
+        .style("font-size", d => d.depth === 1 ? "20px" : "10px")
 
 
 
