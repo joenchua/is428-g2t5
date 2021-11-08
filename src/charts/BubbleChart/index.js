@@ -18,12 +18,12 @@ export default class BubbleChart extends Component {
             countrySet.add(country.NOC)
         })
 
-        this.setState({ countries: Array.from(countrySet).sort() })
+        this.setState({ countries: Array.from(countrySet).sort(),selectedCountry:"LTU" })
         draw(this.props, this.bubbleChart.current, this.state.selectedCountry);
     }
 
     componentDidUpdate() {
-        if (this.state.selectedCountry.length === 0)
+        if (this.state.selectedCountry === "LUT")
             return
 
         draw(this.props, this.bubbleChart.current, this.state.selectedCountry);
@@ -32,7 +32,7 @@ export default class BubbleChart extends Component {
     render() {
         return (
             <>
-                <select onChange={e => this.setState({ selectedCountry: e.target.value })}>
+                <select value={this.selectedCountry} onChange={e => this.setState({ selectedCountry: e.target.value })}>
                     {
                         this.state.countries.map(country => <option key={country} value={country}>{country}</option>)
                     }
