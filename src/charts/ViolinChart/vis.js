@@ -689,7 +689,7 @@ function drawSubChart(props, d, sumstatArray, sumstatGoldArray, sumstatSilverArr
                     .attr("fill", "#999999")
                     .attr("fill-opacity", "0.5")
                     .attr("cx", function (d) {
-                        console.log(d.key);
+                        // console.log(d.key);
                         return x(d.key);
                     })
                     .attr("cy", function (d) {
@@ -751,7 +751,7 @@ function drawSubChart(props, d, sumstatArray, sumstatGoldArray, sumstatSilverArr
                     .attr("fill", "#999999")
                     .attr("fill-opacity", "0.5")
                     .attr("cx", function (d) {
-                        console.log(d.key);
+                        // console.log(d.key);
                         return x(d.key);
                     })
                     .attr("cy", function (d) {
@@ -812,7 +812,7 @@ function drawSubChart(props, d, sumstatArray, sumstatGoldArray, sumstatSilverArr
                     .attr("fill", "#999999")
                     .attr("fill-opacity", "0.5")
                     .attr("cx", function (d) {
-                        console.log(d.key);
+                        // console.log(d.key);
                         return x(d.key);
                     })
                     .attr("cy", function (d) {
@@ -873,7 +873,7 @@ function drawSubChart(props, d, sumstatArray, sumstatGoldArray, sumstatSilverArr
                     .attr("fill", "#999999")
                     .attr("fill-opacity", "0.5")
                     .attr("cx", function (d) {
-                        console.log(d.key);
+                        // console.log(d.key);
                         return x(d.key);
                     })
                     .attr("cy", function (d) {
