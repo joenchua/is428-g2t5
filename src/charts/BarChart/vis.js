@@ -32,9 +32,10 @@ const draw = (props) => {
         return b.values[0] - a.values[0]
     });
 
-    console.log(teamMedals)
+    // console.log(teamMedals)
 
     let myseries = teamMedals.slice(0, 5);
+    console.log(myseries)
 
     let myLabel = [];
     let ranking = ['Gold', 'Silver', 'Bronze'];
@@ -68,15 +69,14 @@ const draw = (props) => {
     var color = d3.scaleOrdinal()
         .domain(data.ranking)
         .range(['#FFD700', '#C0C0C0', '#CD7F32'])
-    // var chartHeight = barHeight * zippedData.length + gapBetweenGroups * data.labels.length;
     var chartHeight = 430;
 
     var x = d3.scaleLinear()
         .domain([0, d3.max(zippedData) + 30])
-        .range([0, chartWidth+100]);
+        .range([0, chartWidth + 100]);
 
     var y = d3.scaleLinear()
-        .range([410,0]);
+        .range([410, 0]);
 
     var yAxis = d3.axisLeft()
         .scale(y)
@@ -88,10 +88,7 @@ const draw = (props) => {
         .append("svg")
         .attr("width", 900)
         .attr("height", chartHeight);
-    
-    var divTooltip = chart
-        .append("div")
-        .attr("class", "toolTip");
+
     // Create bars
     var bar = chart.selectAll("g")
         .data(zippedData)
@@ -99,6 +96,34 @@ const draw = (props) => {
         .attr("transform", function (d, i) {
             return "translate(" + spaceForLabels + "," + (i * barHeight + gapBetweenGroups * (0.5 + Math.floor(i / data.series[0].values.length))) + ")";
         });
+
+    const tooltip = d3.select(".vis-barchart")
+        .append("div")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+
+    const mouseover = function (event, d) {
+        tooltip
+            .style("opacity", 1)
+            .style("class", "tooltip")
+        d3.select(this)
+            .style("stroke", "red")
+            .style("opacity", 1)
+    }
+
+    const mousemove = function (event, d) {
+        tooltip
+            .html('Team: ' + myseries[0].label)
+            .style("left", (event.x) + "px")
+            .style("top", (event.y) + "px")
+    }
+    const mouseleave = function (event, d) {
+        tooltip
+            .style("opacity", 0)
+        d3.select(this)
+            .style("stroke", "none")
+            .style("opacity", 1)
+    }
 
     // Create rectangles of the correct width
     bar.append("rect")
@@ -109,6 +134,9 @@ const draw = (props) => {
         .attr("width", x)
         .attr("height", barHeight - 1)
         .attr("rx", 5)
+        .on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave)
 
 
     // Add text label in bar
