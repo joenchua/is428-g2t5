@@ -9,6 +9,7 @@ import View3 from './views/View3';
 // import View4 from './views/View4';
 import View5 from './views/View5';
 import View6 from './views/View6';
+import BumpChart from './views/BumpChartView';
 
 // import * as d3 from "d3";
 import "./App.css";
@@ -85,6 +86,13 @@ const App = () => {
                 <View5 data={data} />
               </Content>
           </Layout>
+          <Layout style={{ height: 2000 }}>
+          <Layout>
+            <Content style={{ height: 1000, width: 2000 }}>
+              <BumpChart data={data}/>
+            </Content>
+          </Layout>
+      </Layout>
         </Layout>
       }
 </div>
