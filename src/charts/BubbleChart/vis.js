@@ -11,7 +11,7 @@ const draw = (props, componentNode, selectedCountry) => {
 
         return d.Medal !== "NA" && d.NOC === selectedCountry
     });
-
+    console.log(data)
     const rollupData = d3.rollup(
         data,
         d => d.length, // reducerFn
