@@ -10,7 +10,6 @@ const draw = (props) => {
 
     // if empty data, prompt user for data
     if (props.length === 0) {
-        console.log("no data!");
         d3.selectAll(".vis-ViolinChart2 > *").remove();
 
         var svg = d3.select(".vis-ViolinChart2").append("svg")
@@ -20,8 +19,6 @@ const draw = (props) => {
             .attr("transform",
                 "translate(" + margin.left + "," + margin.top + ")");
 
-
-        console.log(svg);
         svg.append("text")
             .attr("text-anchor", "end")
             .attr("x", 95)
@@ -300,7 +297,7 @@ const draw = (props) => {
                 .attr("text-anchor", "end")
                 .attr("x", -38)
                 .attr("y", -11)
-                .text("Height (in cm)")
+                .text("Weight (in kg)")
                 .attr("text-anchor", "start")
 
 
@@ -435,11 +432,6 @@ const draw = (props) => {
 // this is for the line chart
 function drawSubChart(props, d, sumstatArray, sumstatGoldArray, sumstatSilverArray, sumstatBronzeArray, sumstatNAArray) {
 
-    console.log(sumstatGoldArray[0].value[0]);
-    console.log(sumstatSilverArray[0].value[0]);
-    console.log(sumstatBronzeArray[0].value[0]);
-    console.log(sumstatNAArray[0].value[0]);
-
     // x axis is fixed
     const xAxisVal = [0, 10, 20, 30, 40, 50, 60, 70, 80,90,  100, 110, 120,130, 140,150, 160,170, 180, 190,200]
 
@@ -494,11 +486,11 @@ function drawSubChart(props, d, sumstatArray, sumstatGoldArray, sumstatSilverArr
     const silverMedal = makeGraphDetails(sumstatSilverArray[chosenSport].value[0], xAxisVal);
     const bronzeMedal = makeGraphDetails(sumstatBronzeArray[chosenSport].value[0], xAxisVal);
     const noMedal = makeGraphDetails(sumstatNAArray[chosenSport].value[0], xAxisVal);
-
-    console.log(goldMedal);
-    console.log(silverMedal);
-    console.log(bronzeMedal);
-    console.log(noMedal);
+    //
+    // console.log(goldMedal);
+    // console.log(silverMedal);
+    // console.log(bronzeMedal);
+    // console.log(noMedal);
 
 
     let maxValues = Math.max(findMaxAmongAll(goldMedal), findMaxAmongAll(silverMedal), findMaxAmongAll(bronzeMedal), findMaxAmongAll(noMedal));
@@ -691,7 +683,6 @@ function drawSubChart(props, d, sumstatArray, sumstatGoldArray, sumstatSilverArr
                     .attr("fill", "#999999")
                     .attr("fill-opacity", "0.5")
                     .attr("cx", function (d) {
-                        console.log(d.key);
                         return x(d.key);
                     })
                     .attr("cy", function (d) {
@@ -753,7 +744,6 @@ function drawSubChart(props, d, sumstatArray, sumstatGoldArray, sumstatSilverArr
                     .attr("fill", "#999999")
                     .attr("fill-opacity", "0.5")
                     .attr("cx", function (d) {
-                        console.log(d.key);
                         return x(d.key);
                     })
                     .attr("cy", function (d) {

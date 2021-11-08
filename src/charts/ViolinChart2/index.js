@@ -17,33 +17,27 @@ export default class ViolinChart extends Component {
   }
 
     componentDidMount() {
-      console.log("running here...");
-      console.log(this.props);
+      // console.log("running here...");
+      // console.log(this.props);
         draw(this.props.data.filter(d => d.Sport == 'Basketball' || d.Sport == 'Athletics' || d.Sport == 'Gymnastics'))
         drawSubChart(this.props.data);
     }
 
     componentDidUpdate(preProps) {
-      console.log("running here..2.");
-      console.log(this.state.data);
-      console.log(preProps);
+      // console.log("running here..2.");
+      // console.log(this.state.data);
+      // console.log(preProps);
         draw(this.state.data);
         // drawSubChart(this.props);
     }
     render() {
 
-
-
-    console.log("i am here");
-    console.log(this.props);
+    // console.log("i am here");
+    // console.log(this.props);
 
 
     let handleChange = (selected) => {
         let currentSports = selected.map(x => x.value);
-        console.log(currentSports);
-        console.log(selected);
-        console.log("hi");
-        console.log(passData);
         this.setState(
             {
                 optionSelected: selected,
@@ -58,7 +52,6 @@ export default class ViolinChart extends Component {
 
     let passData = this.props.data;
     let dataSport = new Set()
-    console.log(passData);
 
     for (let i = 0; i < passData.length; i++) {
         dataSport.add(passData[i].Sport);
@@ -73,8 +66,6 @@ export default class ViolinChart extends Component {
             "color": "#FF0000"
         });
     }
-    console.log(dataSport);
-    console.log(dataSportObject);
 
     const Option = (props) => {
         return (
