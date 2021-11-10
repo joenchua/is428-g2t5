@@ -4,12 +4,13 @@ import { csv } from 'd3';
 import logo from './assets/logo.png';
 
 import { Layout, Row, Col } from 'antd';
+import ViewBumpChart from './views/BumpChartView';
 import View2 from './views/View2';
 import View3 from './views/View3';
 // import View4 from './views/View4';
 import View5 from './views/View5';
 import View6 from './views/View6';
-import BumpChart from './views/BumpChartView';
+import View7 from './views/View7';
 
 // import * as d3 from "d3";
 import "./App.css";
@@ -58,39 +59,42 @@ const App = () => {
       {!loading && 
         <Layout>
             <Row>
-              <Col>              
-                <Content style={{ height: 500, width: 750 }}>
-                  <View2 data={data}/>
+              <Col span={12}>              
+                <Content>
+                  <View2 data={data} width={750} />
                 </Content>
               </Col>
-              <Col>              
-                <Content style={{ height: 500, width: 750 }}>
+              <Col span={12}>              
+                <Content>
                   <View6 data={data} />
                 </Content>
               </Col>
             </Row>
-            <Layout>
-            </Layout>
-            <Layout>
-              <Content style={{ height: 550, width: 1500 }}>
+            <Row>
+              <Content>
                 <View3 data={data}/>
               </Content>
-            </Layout>
-            {/*<Layout>*/}
-            {/*  <Content style={{ height: 500, width: 750 }}>*/}
-            {/*    <View4 changeGreaterThenAge={greaterThenAge}/>*/}
-            {/*  </Content>*/}
-            {/*</Layout>*/}
-            <Layout>
-              <Content style={{ height: 800, width: 750 }}>
+            </Row>
+            <Row>
+              <Content>
+                <View7 data={data}/>
+              </Content>
+            </Row>
+            <Row>
+              <Content>
                 <View5 data={data} />
               </Content>
-            </Layout>
-            <Layout>
-              <Content style={{ height: 1000, width: 2000 }}>
-                <BumpChart data={data}/>
-              </Content>
-            </Layout>
+            </Row>
+            {/* <Row>
+                <Content style={{ height: 1000, width: 2000 }}>
+                  <View7 data={data}/>
+                </Content>
+            </Row> */}
+            <Row>
+                <Content>
+                  <ViewBumpChart data={data}/>
+                </Content>
+            </Row>
       </Layout>
       }
 </div>

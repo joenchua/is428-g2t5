@@ -4,7 +4,7 @@
 }
 
 .tooltip {
-    position: absolute;
+    /* position: absolute;
     pointer-events: none;
     width: auto;
     height: auto;
@@ -14,5 +14,5 @@
     color: black;
     font: 12px sans-serif;
     padding: 5px;
-    text-align: center;
+    text-align: center; */
 } 

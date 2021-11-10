@@ -113,9 +113,9 @@ const draw = (props) => {
 
     const mousemove = function (event, d) {
         tooltip
-            .html('Team: ' + myseries[0].label)
-            .style("left", (event.x) + "px")
-            .style("top", (event.y) + "px")
+            .html(`${d}`)
+            .style("left", event.pageX + "px")
+            .style("top", event.pageY + "px")
     }
     const mouseleave = function (event, d) {
         tooltip

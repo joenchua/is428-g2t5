@@ -11,7 +11,7 @@ export default class View7 extends Component {
         const height = 1000;
         return (
             <div id='view7' className='pane'>
-                <div className='header'>Violin Chart for Height</div>
+                <div className='header'>Violin Chart for Weight</div>
                 <ViolinChart2 data={data} width={width} height={height} />
             </div>
         )

@@ -20,12 +20,12 @@ const Option = (props) => {
   );
 };
 
-export default class viewBumpChart extends Component {
+export default class ViewBumpChart extends Component {
     constructor(props) {
         super(props);
         var filterOptions = Array.from(new Set(props.data.flatMap(d => [d.NOC]))).map(data => ({ "value": data, "label": data }))
         this.state = {
-          selectValue: Array.from(new Set(["CHN", "IND", "USA", "GER", "NOR", "ROU", "EST", "FRA", "MAR"].map(data=>({"value": data, "label": data})))),
+          selectValue: Array.from(new Set(["USA", "URS", "GER", "AUS", "FRA"].map(data=>({"value": data, "label": data})))),
           filterOptions: filterOptions,
           data: props.data,
         };

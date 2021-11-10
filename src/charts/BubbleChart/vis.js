@@ -126,7 +126,7 @@ const draw = (props, componentNode, selectedCountry) => {
         .style("fill-opacity", d => d.parent === root ? 1 : 0)
         .style("display", d => d.parent === root ? "inline" : "none")
         .text(d => d.data[0])
-        .style("font-size", d => d.depth === 1 ? "20px" : "10px")
+        .style("font-size", d => d.depth === 1 ? "25px" : "20px")
 
 
 
