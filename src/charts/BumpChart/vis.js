@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 const draw = (props) => {
-    console.log(props.data)
+    // console.log(props.data)
     var data = props.data.map(data=> 
             {
             return {"NOC": data.NOC, "Medal": data.Medal,"Year": data.Year}
@@ -43,7 +43,7 @@ const draw = (props) => {
         // console.log("matrix:", matrix2[ni.get(NOC)][yi.get(Year)])
     };    
   
-    // console.log("count medals:", count)
+    console.log("count medals:", count)
 
     matrix2.forEach((d) => {
         for (let i = 0; i<d.length - 1; i++) 

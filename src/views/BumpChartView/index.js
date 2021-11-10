@@ -26,7 +26,7 @@ export default class viewBumpChart extends Component {
         this.state = {
           selectValue: Array.from(new Set(["CHN", "IND", "USA", "GER", "NOR", "ROU", "EST", "FRA", "MAR"].map(data=>({"value": data, "label": data})))),
           filterOptions: [],
-          data: [],
+          data: props.data,
         };
     
         this.handleDropdownChange = this.handleDropdownChange.bind(this);

@@ -85,15 +85,13 @@ const App = () => {
               <Content style={{ height: 800, width: 750 }}>
                 <View5 data={data} />
               </Content>
-          </Layout>
-          <Layout style={{ height: 2000 }}>
-          <Layout>
-            <Content style={{ height: 1000, width: 2000 }}>
-              <BumpChart data={data}/>
-            </Content>
-          </Layout>
+            </Layout>
+            <Layout>
+              <Content style={{ height: 1000, width: 2000 }}>
+                <BumpChart data={data}/>
+              </Content>
+            </Layout>
       </Layout>
-        </Layout>
       }
 </div>
   );
