@@ -87,25 +87,37 @@ const draw = (props) => {
     var chart = d3.select(".vis-barchart")
         .append("svg")
         .attr("width", 900)
-        .attr("height", chartHeight);
+        .attr("height", chartHeight)
+        .style("position", "relative");
 
     // Create bars
     var bar = chart.selectAll("g")
         .data(zippedData)
         .enter().append("g")
+        .attr("class", "bar")
         .attr("transform", function (d, i) {
             return "translate(" + spaceForLabels + "," + (i * barHeight + gapBetweenGroups * (0.5 + Math.floor(i / data.series[0].values.length))) + ")";
         });
 
-    const tooltip = d3.select(".vis-barchart")
+    const tooltip = d3
+        .select(".vis-barchart")
         .append("div")
         .style("opacity", 0)
         .attr("class", "tooltip")
+        .style("background-color", "white")
+        .style("border", "solid")
+        .style("border-width", "2px")
+        .style("border-radius", "5px")
+        .style("padding", "5px")
+        .style('width','200px')
+        .style("position", "absolute")
 
-    const mouseover = function (event, d) {
+    const mouseover = function (d) {
         tooltip
             .style("opacity", 1)
             .style("class", "tooltip")
+            // .style('left','0px')
+            .style("transform","translate(-890px,-80px)")
         d3.select(this)
             .style("stroke", "red")
             .style("opacity", 1)
@@ -113,16 +125,17 @@ const draw = (props) => {
 
     const mousemove = function (event, d) {
         tooltip
-            .html(`${d}`)
+            .html(`Total number of medals: <strong>${d}</strong>`)
             .style("left", event.pageX + "px")
             .style("top", event.pageY + "px")
+
     }
-    const mouseleave = function (event, d) {
+    const mouseleave = function (d) {
         tooltip
             .style("opacity", 0)
         d3.select(this)
             .style("stroke", "none")
-            .style("opacity", 1)
+            // .style("opacity", 1)
     }
 
     // Create rectangles of the correct width

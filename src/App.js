@@ -85,11 +85,6 @@ const App = () => {
                 <View5 data={data} />
               </Content>
             </Row>
-            {/* <Row>
-                <Content style={{ height: 1000, width: 2000 }}>
-                  <View7 data={data}/>
-                </Content>
-            </Row> */}
             <Row>
                 <Content>
                   <ViewBumpChart data={data}/>
