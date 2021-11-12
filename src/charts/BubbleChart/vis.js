@@ -1,6 +1,4 @@
-import { COMPARISON_BINARY_OPERATORS } from '@babel/types';
 import * as d3 from 'd3';
-import { pack, hierarchy } from 'd3-hierarchy'
 
 const draw = (props, componentNode, selectedCountry) => {
     let data = props.data;
@@ -11,7 +9,6 @@ const draw = (props, componentNode, selectedCountry) => {
 
         return d.Medal !== "NA" && d.NOC === selectedCountry
     });
-    console.log(data)
     const rollupData = d3.rollup(
         data,
         d => d.length, // reducerFn
@@ -66,7 +63,7 @@ const draw = (props, componentNode, selectedCountry) => {
 
             let total = 0
             children.forEach(child => {
-                const [_, value] = child.data
+                const [value] = child.data
                 total += value
             })
 
@@ -145,8 +142,6 @@ const draw = (props, componentNode, selectedCountry) => {
     }
 
     function zoom(event, d) {
-        const focus0 = focus;
-
         focus = d;
         const transition = svg.transition()
             .duration(event.altKey ? 7500 : 750)

@@ -35,7 +35,6 @@ const draw = (props) => {
     // console.log(teamMedals)
 
     let myseries = teamMedals.slice(0, 5);
-    console.log(myseries)
 
     let myLabel = [];
     let ranking = ['Gold', 'Silver', 'Bronze'];
@@ -117,9 +116,9 @@ const draw = (props) => {
             .style("opacity", 1)
             .style("class", "tooltip")
             // .style('left','0px')
-            .style("transform","translate(-890px,-80px)")
+            .style("transform","translate(-55rem,-5rem)")
         d3.select(this)
-            .style("stroke", "red")
+            .style("stroke", "black")
             .style("opacity", 1)
     }
 

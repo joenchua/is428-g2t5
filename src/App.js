@@ -4,7 +4,8 @@ import { csv } from 'd3';
 import logo from './assets/logo.png';
 
 import { Layout, Row, Col } from 'antd';
-import ViewBumpChart from './views/BumpChartView';
+import Loader from "react-loader-spinner";
+import View1 from './views/View1';
 import View2 from './views/View2';
 import View3 from './views/View3';
 // import View4 from './views/View4';
@@ -20,17 +21,9 @@ const { Content } = Layout;
 const App = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [greaterThenAge, setgreaterThenAge] = useState(1990);
-
-  // useEffect(() => {
-  //   csv("athlete_events.csv").then(data => {
-  //     setData(data);
-  //     setLoading(false);
-  //   });
-  // }, []);
 
   useEffect(() => {
-    const getClassDetails = async () => {
+    const getData = async () => {
       try {
         const data = await csv("athlete_events_summer.csv");
         if (data.length > 0) {
@@ -42,26 +35,19 @@ const App = () => {
       }
         return () => undefined;
     };
-    getClassDetails();
+    getData();
   },[])
-
-  function changeGreaterThenAge(value) {
-    console.log(greaterThenAge)
-    setgreaterThenAge(value);
-  }
-  
-  const filteredData = data.filter(d=>d.year>greaterThenAge);
 
   return (
     <div>
-      <div className='title' style={{margin: '20px 0'}}><img src={logo} width='70' style={{marginRight: '10px'}} />Olympics Insights<img src={logo} width='70' style={{marginLeft: '10px'}} /></div>
-      {loading && <div>loading</div>}
+      <div className='title' style={{margin: '20px 0'}}><img src={logo} alt="logo" width='70' style={{marginRight: '10px'}} />Olympics Insights<img src={logo} alt="logo" width='70' style={{marginLeft: '10px'}} /></div>
+      {loading && <Loader type="Rings" color="#00BFFF" height={80} width={80} timeout={5000} />}
       {!loading && 
         <Layout>
             <Row>
               <Col span={12}>              
                 <Content>
-                  <View2 data={data} width={750} />
+                  <View2 data={data} />
                 </Content>
               </Col>
               <Col span={12}>              
@@ -87,7 +73,7 @@ const App = () => {
             </Row>
             <Row>
                 <Content>
-                  <ViewBumpChart data={data}/>
+                  <View1 data={data}/>
                 </Content>
             </Row>
       </Layout>

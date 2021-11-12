@@ -42,8 +42,6 @@ const draw = (props) => {
         matrix2[ni.get(NOC)][yi.get(Year)] = {rank: 0, Medal: count, next: null};
         // console.log("matrix:", matrix2[ni.get(NOC)][yi.get(Year)])
     };    
-  
-    console.log("count medals:", count)
 
     matrix2.forEach((d) => {
         for (let i = 0; i<d.length - 1; i++) 
@@ -63,14 +61,10 @@ const draw = (props) => {
     })
 
     var chartData = matrix2
-    console.log("Chartdata:", chartData)
-
 
     const len = Years.length - 1;
     const ranking = chartData.map((d, i) => ({NOC: NOCs[i], first: d[0].rank, last: d[len].rank}));
     
-    console.log(ranking)
-
     var seq = (start, length) => Array.apply(null, {length: length}).map((d, i) => i + start);
     var color = d3.scaleOrdinal(d3.schemeTableau10)
         .domain(seq(0, ranking.length))

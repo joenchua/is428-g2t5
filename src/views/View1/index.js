@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Select from "react-select";
 // import "react-select/dist/react-select.css";
-import './viewBumpChart.css';
+import './view1.css';
 import BumpChart from '../../charts/BumpChart';
 import { components } from "react-select";
 
@@ -20,7 +20,7 @@ const Option = (props) => {
   );
 };
 
-export default class ViewBumpChart extends Component {
+export default class View1 extends Component {
     constructor(props) {
         super(props);
         var filterOptions = Array.from(new Set(props.data.flatMap(d => [d.NOC]))).map(data => ({ "value": data, "label": data }))
@@ -75,7 +75,6 @@ export default class ViewBumpChart extends Component {
                     isMulti
                     />
                 </div>
-                {console.log("value:", this.state.selectValue)}
                 <div className='header'>Medals Ranking</div>
                 <BumpChart data={this.state.data} width={width} height={height} countries={this.state.selectValue.map(data=>data.value)}/>
 
