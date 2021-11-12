@@ -63,7 +63,7 @@ const draw = (props) => {
 
         // disregard athletes without height parameter
         data = data.filter(function (d) {
-            return d.weight != 'NA'
+            return d.weight !== 'NA'
         });
 
         // numerical representation of medals (will be used for sorting  later on)
@@ -125,7 +125,7 @@ const draw = (props) => {
         for (let i = 1; i < dataPreProc.length; i++) {
             // remove extra medals for the same sport
             if (dataPreProc[i].id === dataPreProc[i - 1].id) {
-                if (dataPreProc[i].sport != dataPreProc[i - 1].sport) {
+                if (dataPreProc[i].sport !== dataPreProc[i - 1].sport) {
                     data.push(dataPreProc[i]);
                 }
             } else {
@@ -137,7 +137,7 @@ const draw = (props) => {
 
 
         // create a svg object
-        var svg = d3.select(".vis-ViolinChart2") // select css
+        svg = d3.select(".vis-ViolinChart2") // select css
             .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)

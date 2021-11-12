@@ -19,7 +19,7 @@ export default class ViolinChart extends Component {
     componentDidMount() {
       // console.log("running here...");
       // console.log(this.props);
-        draw(this.props.data.filter(d => d.Sport == 'Basketball' || d.Sport == 'Athletics' || d.Sport == 'Gymnastics'))
+        draw(this.props.data.filter(d => d.Sport === 'Basketball' || d.Sport === 'Athletics' || d.Sport === 'Gymnastics'))
         drawSubChart(this.props.data);
     }
 

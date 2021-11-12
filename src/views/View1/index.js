@@ -56,7 +56,7 @@ export default class View1 extends Component {
         // const {data} = this.props;
         const width = 2000;
         const height = 1000;
-        const countries = ["CHN", "IND", "USA", "GER", "NOR", "ROU", "EST", "FRA", "MAR"]
+        // const countries = ["CHN", "IND", "USA", "GER", "NOR", "ROU", "EST", "FRA", "MAR"]
         // console.log("options:", this.state.filterOptions)
         // console.log(countries)
         // console.log(data)

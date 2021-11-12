@@ -21,7 +21,7 @@ const draw = (props) => {
                 "translate(" + margin.left + "," + margin.top + ")");
 
 
-        console.log(svg);
+        // console.log(svg);
         svg.append("text")
             .attr("text-anchor", "end")
             .attr("x", 95)
@@ -66,7 +66,7 @@ const draw = (props) => {
 
         // disregard athletes without height parameter
         data = data.filter(function (d) {
-            return d.height != 'NA'
+            return d.height !== 'NA'
         });
 
         // numerical representation of medals (will be used for sorting  later on)
@@ -128,7 +128,7 @@ const draw = (props) => {
         for (let i = 1; i < dataPreProc.length; i++) {
             // remove extra medals for the same sport
             if (dataPreProc[i].id === dataPreProc[i - 1].id) {
-                if (dataPreProc[i].sport != dataPreProc[i - 1].sport) {
+                if (dataPreProc[i].sport !== dataPreProc[i - 1].sport) {
                     data.push(dataPreProc[i]);
                 }
             } else {
@@ -140,7 +140,7 @@ const draw = (props) => {
 
 
         // create a svg object
-        var svg = d3.select(".vis-ViolinChart") // select css
+        svg = d3.select(".vis-ViolinChart") // select css
             .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)

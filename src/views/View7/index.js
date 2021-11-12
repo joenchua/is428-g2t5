@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './view7.css';
 import ViolinChart2 from '../../charts/ViolinChart2';
-import {default as ReactSelect} from "react-select";
 
 
 export default class View7 extends Component {

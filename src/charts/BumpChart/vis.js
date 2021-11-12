@@ -53,8 +53,6 @@ const draw = (props) => {
         const array = [];
         matrix2.forEach((d) => array.push(d[i]));
         array.sort((a, b) => b.Medal - a.Medal);
-        let count = 0;
-        let index = 0;
         array.forEach((d, j) => {
                 return d.rank = j
         });

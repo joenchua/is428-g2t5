@@ -3,10 +3,6 @@ import * as d3 from "d3";
 const drawSubChart = (props) => {
 
     // console.log("Hello!!!!!");
-    const xAxisVal = [120, 125, 130,
-        135, 140, 145, 150, 155, 160, 165,
-        170, 175, 180, 185, 190, 195, 200,
-        205, 210, 215, 220]
 
     const margin = {top: 30, right: 30, bottom: 80, left: 40},
         width = 730 - margin.left - margin.right,
