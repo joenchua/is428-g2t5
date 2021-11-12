@@ -8,7 +8,6 @@ import Loader from "react-loader-spinner";
 import View1 from './views/View1';
 import View2 from './views/View2';
 import View3 from './views/View3';
-// import View4 from './views/View4';
 import View5 from './views/View5';
 import View6 from './views/View6';
 import View7 from './views/View7';

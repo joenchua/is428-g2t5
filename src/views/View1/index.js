@@ -41,7 +41,7 @@ export default class View1 extends Component {
     });
 
     }
-    componentWillReceiveProps = (nextProps) => {
+    componentDidUpdate = (nextProps) => {
         // console.log("hi", nextProps.data)
         if (nextProps.data !== this.props.data) {
         //   this.moveMap(nextProps.data)

@@ -73,13 +73,13 @@ const draw = (props) => {
 
         data.map(d => {
                 if (d.medal === 'NA') {
-                    d.medal = 0
+                    return d.medal = 0
                 } else if (d.medal === 'Bronze') {
-                    d.medal = 1
+                    return d.medal = 1
                 } else if (d.medal === 'Silver') {
-                    d.medal = 2
+                    return d.medal = 2
                 } else if (d.medal === 'Gold') {
-                    d.medal = 3
+                    return d.medal = 3
                 }
             }
         );

@@ -32,8 +32,6 @@ const draw = (props) => {
     height = 430 - margin.top - margin.bottom;
 
     const keys = ['female','male']
-
-    console.log(keys)
     
     // color palette
     const color = d3.scaleOrdinal()
@@ -123,7 +121,7 @@ const draw = (props) => {
     .enter()
     .append("path")
       .attr("class", function(d) { return "myArea " + d.key })
-      .style("fill", function(d) { console.log(color(d.key)); return color(d.key); })
+      .style("fill", function(d) { return color(d.key); })
       .attr("d", area)
 
   // Add the brushing
