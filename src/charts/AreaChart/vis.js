@@ -158,6 +158,18 @@ const draw = (props) => {
       .attr("d", area)
     }
 
+    const highlight = function(event,d){
+      // reduce opacity of all groups
+      d3.selectAll(".myArea").style("opacity", .1)
+      // expect the one that is hovered
+      d3.select("."+d).style("opacity", 1)
+    }
+
+    // And when it is not hovered anymore
+    const noHighlight = function(event,d){
+      d3.selectAll(".myArea").style("opacity", 1)
+    }
+
     ////////////
     // LEGEND //
     ///////////
@@ -172,6 +184,8 @@ const draw = (props) => {
         .attr("width", size)
         .attr("height", size)
         .style("fill", function(d){ return color(d)})
+        .on("mouseover", highlight)
+        .on("mouseleave", noHighlight)
 
     svg.selectAll("mylabels")
       .data(keys)
@@ -183,6 +197,8 @@ const draw = (props) => {
         .text(function(d){ return d})
         .attr("text-anchor", "left")
         .style("alignment-baseline", "middle")
+        .on("mouseover", highlight)
+        .on("mouseleave", noHighlight)
 
 }
 
