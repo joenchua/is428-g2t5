@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, createRef} from 'react';
 import draw from './vis';
 
 export default class BubbleChart extends Component {
 
     constructor(props) {
         super(props)
-        this.bubbleChart = React.createRef()
+        this.bubbleChart = createRef()
         this.state = {
             countries: [],
             selectedCountry: ""
@@ -35,7 +35,7 @@ export default class BubbleChart extends Component {
                         this.state.countries.map(country => <option key={country} value={country}>{country}</option>)
                     }
                 </select>
-                <div key={this.state.selectedCountry} className='vis-bubblechart' ref={this.bubbleChart} style={{ width: '500px' }} />
+                <div key={this.state.selectedCountry} className='vis-bubblechart' ref={this.bubbleChart} style={{ width: '500px', height: '600px', margin: 'auto' }} />
             </>
         )
     }

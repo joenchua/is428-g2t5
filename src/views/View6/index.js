@@ -9,7 +9,7 @@ export default class View6 extends Component {
         const height = 500;
         return (
             <div id='view6' className='pane'>
-                <div className='header'>Top 5 Countries </div>    
+                <div className='header'>Grouped Bar Chart for Top 5 Performing Countries </div>    
                 {/* <div class="tooltip"></div> */}
                 <BarChart data={data} width={width} height={height} />
             </div>

@@ -28,7 +28,7 @@ const draw = (props) => {
     data.sort((a,b) => (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0))
 
     var margin = {top: 10, right: 30, bottom: 30, left: 50},
-    width = 800 - margin.left - margin.right,
+    width = 850 - margin.left - margin.right,
     height = 430 - margin.top - margin.bottom;
 
     const keys = ['female','male']
@@ -66,7 +66,7 @@ const draw = (props) => {
   // Add X axis label:
   svg.append("text")
       .attr("text-anchor", "end")
-      .attr("x", 740)
+      .attr("x", 800)
       .attr("y", 350 )
       .text("year");
 
@@ -74,7 +74,7 @@ const draw = (props) => {
   svg.append("text")
       .attr("text-anchor", "end")
       .attr("x", 0)
-      .attr("y", 0 )
+      .attr("y", 20 )
       .text("# of Athletes")
       .attr("text-anchor", "start")
 
@@ -101,7 +101,7 @@ const draw = (props) => {
 
   // Add brushing
   var brush = d3.brushX()
-      .extent( [ [0,0], [width,height-40] ] )
+      .extent( [ [0,0], [width,height-60] ] )
       .on("end", updateChart)
 
   // Creating a scatter variable where both the circles and the brush take place
@@ -132,7 +132,6 @@ const draw = (props) => {
       .attr("class", "brush")
       .style("transform","translateY(-40px)")
       .call(brush)
-    //   .attr('transform', 'translate(20,40)')
 
   var idleTimeout
   function idled() { idleTimeout = null; }

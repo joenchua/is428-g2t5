@@ -40,7 +40,7 @@ const App = () => {
 
   return (
     <div>
-      <div className='title' style={{margin: '20px 0'}}><img src={logo} alt="logo" width='70' style={{marginRight: '10px'}} />Olympics Insights<img src={logo} alt="logo" width='70' style={{marginLeft: '10px'}} /></div>
+      <div className='title' style={{margin: '20px 0'}}><img src={logo} alt="logo" width='70' style={{marginRight: '10px'}} />Visualising 120 Years of The Olympic Games<img src={logo} alt="logo" width='70' style={{marginLeft: '10px'}} /></div>
       {loading && <Loader type="Rings" color="#00BFFF" height={80} width={80} timeout={5000} />}
       {!loading && 
         <Layout>

@@ -9,7 +9,7 @@ export default class View2 extends Component {
         const height = 500;
         return (
             <div id='view2' className='pane'>
-                <div className='header'>Area Chart for Gender</div>
+                <div className='header'>Stacked Area Chart for Gender</div>
                 <AreaChart data={data} width={width} height={height} />
             </div>
         )

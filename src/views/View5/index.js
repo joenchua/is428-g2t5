@@ -9,7 +9,7 @@ export default class View5 extends Component {
 
         return (
             <div id='view5' className='pane'>
-                <div className='header'>Bubble</div>
+                <div className='header'>Packed Bubbles Chart for each Event</div>
                 <BubbleChart data={data} width={width} height={height} />
             </div>
         )
