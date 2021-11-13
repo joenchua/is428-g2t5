@@ -49,10 +49,10 @@ const draw = (props) => {
         ranking: ['Gold', 'Silver', 'Bronze']
     })
 
-    var chartWidth = 400,
+    var chartWidth = 350,
         barHeight = 20,
         groupHeight = barHeight * data.series.length,
-        gapBetweenGroups = 20,
+        gapBetweenGroups = 15,
         spaceForLabels = 70;
 
     // Zip the series data together (first values, second values, etc.)
@@ -89,14 +89,29 @@ const draw = (props) => {
         .attr("height", chartHeight)
         .style("position", "relative");
 
-    // Create bars
-    var bar = chart.selectAll("g")
+        // Create bars
+        var bar = chart.selectAll("g")
         .data(zippedData)
         .enter().append("g")
         .attr("class", "bar")
         .attr("transform", function (d, i) {
             return "translate(" + spaceForLabels + "," + (i * barHeight + gapBetweenGroups * (0.5 + Math.floor(i / data.series[0].values.length))) + ")";
         });
+
+    // Add X axis label:
+    chart.append("text")
+        .attr("text-anchor", "end")
+        .attr("x", 650)
+        .attr("y", 400 )
+        .text("Number of Medals");
+
+    // Add Y axis label:
+    chart.append("text")
+        .attr("text-anchor", "end")
+        .attr("x", 10)
+        .attr("y", 10 )
+        .text("Country")
+        .attr("text-anchor", "start")
 
     const tooltip = d3
         .select(".vis-barchart")
@@ -116,7 +131,7 @@ const draw = (props) => {
             .style("opacity", 1)
             .style("class", "tooltip")
             // .style('left','0px')
-            .style("transform","translate(-55rem,-5rem)")
+            .style("transform","translate(-45rem,-5rem)")
         d3.select(this)
             .style("stroke", "black")
             .style("opacity", 1)
@@ -210,7 +225,7 @@ const draw = (props) => {
     legend.append('rect')
         .attr('width', legendRectSize)
         .attr('height', legendRectSize)
-        .attr("transform", `translate(${chartWidth-230}, -5)`)
+        .attr("transform", `translate(${chartWidth-180}, -5)`)
         .style('fill', function (d, i) {
             return color(i);
         })

@@ -63,7 +63,7 @@ const draw = (props) => {
 
         // disregard athletes without height parameter
         data = data.filter(function (d) {
-            return d.weight !== 'NA'
+            return d.height !== 'NA' && d.sport !== 'Tug-Of-War'
         });
 
         // numerical representation of medals (will be used for sorting  later on)

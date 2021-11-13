@@ -28,7 +28,7 @@ const draw = (props) => {
     data.sort((a,b) => (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0))
 
     var margin = {top: 10, right: 30, bottom: 30, left: 50},
-    width = 850 - margin.left - margin.right,
+    width = 700 - margin.left - margin.right,
     height = 430 - margin.top - margin.bottom;
 
     const keys = ['female','male']
@@ -64,7 +64,7 @@ const draw = (props) => {
   // Add X axis label:
   svg.append("text")
       .attr("text-anchor", "end")
-      .attr("x", 800)
+      .attr("x", 640)
       .attr("y", 350 )
       .text("year");
 
@@ -143,7 +143,7 @@ const draw = (props) => {
     if(!extent){
       if (!idleTimeout) return idleTimeout = setTimeout(idled, 350); // This allows to wait a little bit
       x.domain(d3.extent(data, function(d) { return d.year; }))
-    }else{
+    } else{
       x.domain([ x.invert(extent[0]), x.invert(extent[1]) ])
       areaChart.select(".brush").call(brush.move, null) // This remove the grey brush area as soon as the selection has been done
     }
@@ -177,7 +177,7 @@ const draw = (props) => {
       .data(keys)
       .enter()
       .append("rect")
-        .attr("x", 600)
+        .attr("x", 500)
         .attr("y", function(d,i){ return 10 + i*(size+5)}) // 100 is where the first dot appears. 25 is the distance between dots
         .attr("width", size)
         .attr("height", size)
@@ -189,7 +189,7 @@ const draw = (props) => {
       .data(keys)
       .enter()
       .append("text")
-        .attr("x", 600 + size*1.2)
+        .attr("x", 500 + size*1.2)
         .attr("y", function(d,i){ return 10 + i*(size+5) + (size/2)}) // 100 is where the first dot appears. 25 is the distance between dots
         .style("fill", function(d){ return color(d)})
         .text(function(d){ return d})

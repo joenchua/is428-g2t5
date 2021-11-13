@@ -71,9 +71,9 @@ const App = () => {
               </Content>
             </Row>
             <Row>
-                <Content>
-                  <View1 data={data}/>
-                </Content>
+              <Content>
+                <View1 data={data}/>
+              </Content>
             </Row>
       </Layout>
       }
