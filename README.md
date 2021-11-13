@@ -1,6 +1,6 @@
-# Visualising The Olympic games
+# IS 428 G2T5 Project: Visualising The Olympic Games
 
-To view the static dashboard on S3: http://va-g2t5.s3-website-us-east-1.amazonaws.com/
+To view the static dashboard on S3: http://va-g2t5.s3-website-us-east-1.amazonaws.com/. It may take up to 2 minutes to load all visualisations on the dashboard. We apologise for the waiting time.
 
 # Getting Started with Create React App
 
