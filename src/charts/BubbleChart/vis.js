@@ -21,7 +21,7 @@ const draw = (props, componentNode, selectedCountry) => {
     const hierarchyData = d3.hierarchy([null, rollupData], childrenAccessorFn)
         .sum(([key, value]) => value)
         .sort((a, b) => b.value - a.value)
-
+    // console.log(hierarchyData)
     const width = 932
     const height = 932
 
@@ -54,28 +54,35 @@ const draw = (props, componentNode, selectedCountry) => {
             .style("opacity", 1)
     }
 
-    var mousemove = function (event,d) {
-        const { children = null } = d
+    var mousemove = function (event, d) {
+        const { children = null, depth } = d
         if (children) {
-            if (children.length > 0 && children[0].children) {
+            let total = 0
+
+            if (depth === 0)
                 tooltip.style("opacity", 0)
+
+            if (depth === 1) {
+                children.forEach(child => {
+                    const [_, value] = child.data
+                    total += value
+                })
+            } else {
+                children.forEach(child => {
+                    const [value] = child.data
+                    total += value
+                })
             }
 
-            let total = 0
-            children.forEach(child => {
-                const [value] = child.data
-                total += value
-            })
-
             tooltip
-            .html(`Sport: ${d.data[0]} </br> Total number of Medal: ${total}`)
-            .style("left",event.pageX + "px")
-            .style("top",event.pageY + "px")
+                .html(`Sport: ${d.data[0]} </br> Total number of Medal: ${total}`)
+                .style("left", event.pageX + "px")
+                .style("top", event.pageY + "px")
         } else {
             tooltip
-            .html(`Sport: ${d.data[0]} </br> Total number of Medal: ${d.data[1]}`)
-            .style("left",event.pageX + "px")
-            .style("top",event.pageY + "px")
+                .html(`Sport: ${d.data[0]} </br> Total number of Medal: ${d.data[1]}`)
+                .style("left", event.pageX + "px")
+                .style("top", event.pageY + "px")
         }
     }
 
