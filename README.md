@@ -2,6 +2,12 @@
 
 To view the static dashboard on S3: http://va-g2t5.s3-website-us-east-1.amazonaws.com/. It may take up to 2 minutes to load all visualisations on the dashboard. We apologise for the waiting time.
 
+To view the dashboard in development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+All d3.js Codes are in vis.js for each chart's folder.
+Dashboard is rendered from App.js, which combines all the charts into one comprehensive dashboard view.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
