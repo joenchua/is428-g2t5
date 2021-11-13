@@ -419,13 +419,12 @@ const draw = (props) => {
                             tempLength += sumstatArray[sport].value[0][i].length
                         }
 
-                        return "Sport: " + sumstatArray[sport].key + "\nMedian Height: " + sumstatArray[sport].value[1] + " cm" +
+                        return "Sport: " + sumstatArray[sport].key + "\nMedian Weight: " + sumstatArray[sport].value[1] + " cm" +
                             "\nUnique Athletes: " + tempLength;
                     }
                 )
             ;
         }
-
     }
 }
 
@@ -702,7 +701,7 @@ function drawSubChart(props, d, sumstatArray, sumstatGoldArray, sumstatSilverArr
                     })
                     .select("title")
                     .text(function (d) {
-                            return "Athletes without medals\nHeight: " + d.key + " cm\nPercentage Athletes: " + (d.value * 100).toFixed(2) + "%";
+                            return "Athletes without medals\nWeight: " + d.key + " cm\nPercentage Athletes: " + (d.value * 100).toFixed(2) + "%";
                         }
                     )
 
@@ -728,7 +727,7 @@ function drawSubChart(props, d, sumstatArray, sumstatGoldArray, sumstatSilverArr
         })
         .append("title")
         .text(function (d) {
-                return "Athletes without medals\nHeight: " + d.key + " cm\nPercentage Athletes: " + (d.value * 100).toFixed(2) + "%";
+                return "Athletes without medals\nWeight: " + d.key + " cm\nPercentage Athletes: " + (d.value * 100).toFixed(2) + "%";
             }
         )
 
@@ -763,7 +762,7 @@ function drawSubChart(props, d, sumstatArray, sumstatGoldArray, sumstatSilverArr
                     })
                     .select("title")
                     .text(function (d) {
-                            return "Gold Medallists\nHeight: " + d.key + " cm\nPercentage Athletes: " + (d.value * 100).toFixed(2) + "%";
+                            return "Gold Medallists\nWeight: " + d.key + " cm\nPercentage Athletes: " + (d.value * 100).toFixed(2) + "%";
                         }
                     )
 
@@ -789,7 +788,7 @@ function drawSubChart(props, d, sumstatArray, sumstatGoldArray, sumstatSilverArr
         })
         .append("title")
         .text(function (d) {
-                return "Gold Medallists\nHeight: " + d.key + " cm\nPercentage Athletes: " + (d.value * 100).toFixed(2) + "%";
+                return "Gold Medallists\nWeight: " + d.key + " cm\nPercentage Athletes: " + (d.value * 100).toFixed(2) + "%";
             }
         )
     ;
@@ -824,7 +823,7 @@ function drawSubChart(props, d, sumstatArray, sumstatGoldArray, sumstatSilverArr
                     })
                     .select("title")
                     .text(function (d) {
-                            return "Silver Medallists\nHeight: " + d.key + " cm\nPercentage Athletes: " + (d.value * 100).toFixed(2) + "%";
+                            return "Silver Medallists\nWeight: " + d.key + " cm\nPercentage Athletes: " + (d.value * 100).toFixed(2) + "%";
                         }
                     )
 
@@ -850,7 +849,7 @@ function drawSubChart(props, d, sumstatArray, sumstatGoldArray, sumstatSilverArr
         })
         .append("title")
         .text(function (d) {
-                return "Silver Medallists\nHeight: " + d.key + " cm\nPercentage Athletes: " + (d.value * 100).toFixed(2) + "%";
+                return "Silver Medallists\nWeight: " + d.key + " cm\nPercentage Athletes: " + (d.value * 100).toFixed(2) + "%";
             }
         )
     ;
@@ -885,7 +884,7 @@ function drawSubChart(props, d, sumstatArray, sumstatGoldArray, sumstatSilverArr
                     })
                     .select("title")
                     .text(function (d) {
-                            return "Bronze Medallists\nHeight: " + d.key + " cm\nPercentage Athletes: " + (d.value * 100).toFixed(2) + "%";
+                            return "Bronze Medallists\nWeight: " + d.key + " cm\nPercentage Athletes: " + (d.value * 100).toFixed(2) + "%";
                         }
                     )
 
@@ -911,7 +910,7 @@ function drawSubChart(props, d, sumstatArray, sumstatGoldArray, sumstatSilverArr
         })
         .append("title")
         .text(function (d) {
-                return "Bronze Medallists\nHeight: " + d.key + " cm\nPercentage Athletes: " + (d.value * 100).toFixed(2) + "%";
+                return "Bronze Medallists\nWeight: " + d.key + " cm\nPercentage Athletes: " + (d.value * 100).toFixed(2) + "%";
             }
         )
     ;
